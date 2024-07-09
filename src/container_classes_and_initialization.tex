@@ -1,0 +1,35 @@
+\section{Container Classes and Initialization}
+\begin{enumerate}
+  \item \textbf{Vector:}
+    \begin{enumerate}
+      \item Class:
+	\begin{lstlisting}[language=C++]
+	template < class T,
+	class Alloc = allocator<T>> class vector;
+	\end{lstlisting}
+      \item Initialization:
+	\begin{enumerate}
+	  \item \texttt{vector<int> v}: Declares a vector of integers.
+	  \item \texttt{vector<int> v(n)}: Declares a vector of integers of size n.
+	  \item \texttt{vector<int> v(n, x)}: Declares a vector of integers of size n, with all elements initialized to x.
+	  \item \texttt{vector<int> v = \{1, 2, 3, 4\}}: Declares a vector of integers with the elements 1, 2, 3 and 4.
+	  \item \texttt{vector<int> v \{1, 2, 3, 4\}}: Declares a vector of integers with the elements 1, 2, 3 and 4.
+	\end{enumerate}
+    \end{enumerate}
+  \item \textbf{Set:}
+    \begin{enumerate}
+      \item Class:
+	\begin{lstlisting}[language=C++]
+	template < class T,
+	class Compare = less<T>, \\ View Interesting Classes Chapter for more information
+	class Alloc = allocator<T>> class set;
+	\end{lstlisting}
+      \item Initialization:
+	\begin{enumerate}
+	  \item \texttt{set<int> s}: Declares a set of integers.
+	  \item \texttt{set<int> s \{1, 2, 3, 4\}}: Declares a set of integers with the elements 1, 2, 3 and 4.
+	  \item \texttt{set<int> s = \{1, 2, 3, 4\}}: Declares a set of integers with the elements 1, 2, 3 and 4.
+	\end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\newpage

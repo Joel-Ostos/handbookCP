@@ -1,0 +1,45 @@
+\section{Functions}
+\section*{Containers Functions}
+\begin{enumerate}
+  \item \textbf{Vector:}
+  \item \textbf{Set:}
+    \begin{enumerate}
+      \item \texttt{insert(x)}: Insert element x in the set. ej: 
+	\begin{lstlisting}[language=C++]
+	set<int> s;
+	s.insert(5);
+	// New value of s = {5}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{erase(x)}: Erase element x from the set. ej: 
+	\begin{lstlisting}[language=C++]
+	set<int> s ({5, 6, 7});
+	s.erase(5);
+	// New value of s = {6, 7}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{find(x)}: Find element x in the set. ej: 
+	\begin{lstlisting}[language=C++]
+	set<int> s; 
+	s.find(5);
+	// Will return s.end() if x is not in the set
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{lower\_bound(x)}: Find the first element that is not less than x. ej:
+	\begin{lstlisting}[language=C++]
+	set<int> s ({5, 6, 7});
+	s.lower_bound(6);
+	// Will return an iterator to the element 6
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+      \item \texttt{upper\_bound(x)}: Find the first element that is greater than x. ej:
+	\begin{lstlisting}[language=C++]
+	set<int> s ({5, 6, 7});
+	s.upper_bound(6);
+	// Will return an iterator to the element 7
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+    \end{enumerate}
+\end{enumerate}
