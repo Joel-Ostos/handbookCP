@@ -1,0 +1,167 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{multicol}
+
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{forest}
+\usepackage{tikz-qtree}
+
+\usepackage{multirow}
+\usepackage{listings}
+
+\title{Competitive Programming Notebook} % Title
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\author{
+ Daniel Santiago Lopez Daza\\
+   \texttt{dlopezd@unal.edu.co}
+  \and
+  Tomás David Rodriguez Agudelo\\
+  \texttt{trodrigueza@unal.edu.co}
+  \and
+  Eduard Joel Ostos Castro\\
+    \texttt{eostos@unal.edu.co}  
+}
+% Code snippet
+%\lstinputlisting[language=Cpp]{name.cpp}
+
+\date{Last updated: \today}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Snippets}
+\section{Template}
+\section{Macros}
+\section{Container Classes and Initialization}
+\begin{enumerate}
+  \item \textbf{Vector:}
+    \begin{enumerate}
+      \item Class:
+	\begin{lstlisting}[language=C++]
+	template < class T,
+	class Alloc = allocator<T>> class vector;
+	\end{lstlisting}
+      \item Initialization:
+	\begin{enumerate}
+	  \item \texttt{vector<int> v}: Declares a vector of integers.
+	  \item \texttt{vector<int> v(n)}: Declares a vector of integers of size n.
+	  \item \texttt{vector<int> v(n, x)}: Declares a vector of integers of size n, with all elements initialized to x.
+	  \item \texttt{vector<int> v = \{1, 2, 3, 4\}}: Declares a vector of integers with the elements 1, 2, 3 and 4.
+	  \item \texttt{vector<int> v \{1, 2, 3, 4\}}: Declares a vector of integers with the elements 1, 2, 3 and 4.
+	\end{enumerate}
+    \end{enumerate}
+  \item \textbf{Set:}
+    \begin{enumerate}
+      \item Class:
+	\begin{lstlisting}[language=C++]
+	template < class T,
+	class Compare = less<T>, \\ View Interesting Classes Chapter for more information
+	class Alloc = allocator<T>> class set;
+	\end{lstlisting}
+      \item Initialization:
+	\begin{enumerate}
+	  \item \texttt{set<int> s}: Declares a set of integers.
+	  \item \texttt{set<int> s \{1, 2, 3, 4\}}: Declares a set of integers with the elements 1, 2, 3 and 4.
+	  \item \texttt{set<int> s = \{1, 2, 3, 4\}}: Declares a set of integers with the elements 1, 2, 3 and 4.
+	\end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\section{Functions}
+\section*{Containers Functions}
+\begin{enumerate}
+  \item \textbf{Vector:}
+  \item \textbf{Set:}
+    \begin{enumerate}
+      \item \texttt{insert(x)}: Insert element x in the set. ej: 
+	\begin{lstlisting}[language=C++]
+	set<int> s;
+	s.insert(5);
+	// New value of s = {5}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{erase(x)}: Erase element x from the set. ej: 
+	\begin{lstlisting}[language=C++]
+	set<int> s ({5, 6, 7});
+	s.erase(5);
+	// New value of s = {6, 7}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{find(x)}: Find element x in the set. ej: 
+	\begin{lstlisting}[language=C++]
+	set<int> s; 
+	s.find(5);
+	// Will return s.end() if x is not in the set
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{lower\_bound(x)}: Find the first element that is not less than x. ej:
+	\begin{lstlisting}[language=C++]
+	set<int> s ({5, 6, 7});
+	s.lower_bound(6);
+	// Will return an iterator to the element 6
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+      \item \texttt{upper\_bound(x)}: Find the first element that is greater than x. ej:
+	\begin{lstlisting}[language=C++]
+	set<int> s ({5, 6, 7});
+	s.upper_bound(6);
+	// Will return an iterator to the element 7
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+    \end{enumerate}
+\end{enumerate}
+\section{Data Structures}
+\section{Greedy}
+\section{Two Pointers}
+\section{Search}
+\section*{Binary Search}
+\section*{Ternary Search}
+\section{Sorting}
+\section{Array and Range Sums}
+\section{Dynamic Programming}
+\section{Number Theory}
+\section{Graph Theory}
+%\Large{\textbf{Array and range sums:}}
+\end{document}
