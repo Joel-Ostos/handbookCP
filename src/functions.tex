@@ -2,25 +2,266 @@
 \section*{Containers Functions}
 \begin{enumerate}
   \item \textbf{Vector:}
+    \begin{enumerate}
+      \item \texttt{push\_back(x)}: Insert element x at the end of the vector. ej:
+	\begin{lstlisting}[language=C++]
+	vector<int> v;
+	v.push_back(5);
+	// New value of v = {5}
+	\end{lstlisting}
+	\textbf{Note:} Amortized complexity of O(1).
+      \item \texttt{pop\_back()}: Remove the last element of the vector. ej:
+	\begin{lstlisting}[language=C++]
+	vector<int> v ({5, 6, 7});
+	v.pop_back();
+	// New value of v = {5, 6}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+      \item \texttt{size()}: Return the number of elements in the vector. ej:
+	\begin{lstlisting}[language=C++]
+	vector<int> v ({5, 6, 7});
+	v.size();
+	// Will return 3
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+      \item \texttt{at(i)}: Access the element at index i. ej:
+	\begin{lstlisting}[language=C++]
+	vector<int> v ({5, 6, 7});
+	v.at(1);
+	// Will return 6
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+      \item \texttt{clear()}: Remove all elements from the vector. ej:
+	\begin{lstlisting}[language=C++]
+	vector<int> v ({5, 6, 7});
+	v.clear();
+	// New value of v = {}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(n).
+    \end{enumerate}
+  \item \textbf{Map:}
+    \begin{enumerate}
+      \item \texttt{insert(\{key, value\})}: Insert key-value pair in the map. ej:
+	\begin{lstlisting}[language=C++]
+	map<int, int> m;
+	m.insert({5, 10});
+	// New value of m = { {5, 10} }
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{erase(key)}: Erase element with the given key from the map. ej:
+	\begin{lstlisting}[language=C++]
+	map<int, int> m ({ {5, 10}, {6, 20} });
+	m.erase(5);
+	// New value of m = { {6, 20} }
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{find(key)}: Find element with the given key in the map. ej:
+	\begin{lstlisting}[language=C++]
+	map<int, int> m;
+	m.find(5);
+	// Will return m.end() if key is not in the map
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{lower\_bound(key)}: Find the first element that is not less than the given key. ej:
+	\begin{lstlisting}[language=C++]
+	map<int, int> m ({ {5, 10}, {6, 20} });
+	m.lower_bound(6);
+	// Will return an iterator to the element {6, 20}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+      \item \texttt{upper\_bound(key)}: Find the first element that is greater than the given key. ej:
+	\begin{lstlisting}[language=C++]
+	map<int, int> m ({ {5, 10}, {6, 20} });
+	m.upper_bound(6);
+	// Will return an iterator to the end of the map
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+    \end{enumerate}
+  \item \textbf{Multiset:}
+    \begin{enumerate}
+      \item \texttt{insert(x)}: Insert element x in the multiset. ej:
+	\begin{lstlisting}[language=C++]
+	multiset<int> ms;
+	ms.insert(5);
+	// New value of ms = {5}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{erase(x)}: Erase all instances of element x from the multiset. ej:
+	\begin{lstlisting}[language=C++]
+	multiset<int> ms ({5, 6, 7, 5});
+	ms.erase(5);
+	// New value of ms = {6, 7}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{find(x)}: Find an instance of element x in the multiset. ej:
+	\begin{lstlisting}[language=C++]
+	multiset<int> ms;
+	ms.find(5);
+	// Will return ms.end() if x is not in the multiset
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{lower\_bound(x)}: Find the first element that is not less than x. ej:
+	\begin{lstlisting}[language=C++]
+	multiset<int> ms ({5, 6, 7});
+	ms.lower_bound(6);
+	// Will return an iterator to the element 6
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+      \item \texttt{upper\_bound(x)}: Find the first element that is greater than x. ej:
+	\begin{lstlisting}[language=C++]
+	multiset<int> ms ({5, 6, 7});
+	ms.upper_bound(6);
+	// Will return an iterator to the element 7
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+	\textbf{Note:} Uses Binary Search under the hood.
+    \end{enumerate}
+  \item \textbf{Unordered Set:}
+    \begin{enumerate}
+      \item \texttt{insert(x)}: Insert element x in the unordered set. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_set<int> us;
+	us.insert(5);
+	// New value of us = {5}
+	\end{lstlisting}
+	\textbf{Note:} Average complexity of O(1), worst-case complexity of O(n).
+      \item \texttt{erase(x)}: Erase element x from the unordered set. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_set<int> us ({5, 6, 7});
+	us.erase(5);
+	// New value of us = {6, 7}
+	\end{lstlisting}
+	\textbf{Note:} Average complexity of O(1), worst-case complexity of O(n).
+      \item \texttt{find(x)}: Find element x in the unordered set. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_set<int> us;
+	us.find(5);
+	// Will return us.end() if x is not in the unordered set
+	\end{lstlisting}
+	\textbf{Note:} Average complexity of O(1), worst-case complexity of O(n).
+      \item \texttt{bucket\_count()}: Return the number of buckets in the unordered set. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_set<int> us ({5, 6, 7});
+	us.bucket_count();
+	// Will return the number of buckets
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+      \item \texttt{load\_factor()}: Return the load factor of the unordered set. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_set<int> us ({5, 6, 7});
+	us.load_factor();
+	// Will return the load factor
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+    \end{enumerate}
+  \item \textbf{Unordered Map:}
+    \begin{enumerate}
+      \item \texttt{insert(\{key, value\})}: Insert key-value pair in the unordered map. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_map<int, int> um;
+	um.insert({5, 10});
+	// New value of um = { {5, 10} }
+	\end{lstlisting}
+	\textbf{Note:} Average complexity of O(1), worst-case complexity of O(n).
+      \item \texttt{erase(key)}: Erase element with the given key from the unordered map. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_map<int, int> um ({ {5, 10}, {6, 20} });
+	um.erase(5);
+	// New value of um = { {6, 20} }
+	\end{lstlisting}
+	\textbf{Note:} Average complexity of O(1), worst-case complexity of O(n).
+      \item \texttt{find(key)}: Find element with the given key in the unordered map. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_map<int, int> um;
+	um.find(5);
+	// Will return um.end() if key is not in the unordered map
+	\end{lstlisting}
+	\textbf{Note:} Average complexity of O(1), worst-case complexity of O(n).
+      \item \texttt{bucket\_count()}: Return the number of buckets in the unordered map. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_map<int, int> um ({ {5, 10}, {6, 20} });
+	um.bucket_count();
+	// Will return the number of buckets
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+      \item \texttt{load\_factor()}: Return the load factor of the unordered map. ej:
+	\begin{lstlisting}[language=C++]
+	unordered_map<int, int> um ({ {5, 10}, {6, 20} });
+	um.load_factor();
+	// Will return the load factor
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(1).
+    \end{enumerate}
+  \item \textbf{Order Statistics Tree (using \texttt{tree} from \texttt{<ext/pb\_ds/assoc\_container.hpp>}):}
+    \begin{enumerate}
+      \item \texttt{insert(x)}: Insert element x in the order statistics tree. ej:
+	\begin{lstlisting}[language=C++]
+	#include <ext/pb_ds/assoc_container.hpp>
+	using namespace __gnu_pbds;
+	tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ost;
+	ost.insert(5);
+	// New value of ost = {5}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{erase(x)}: Erase element x from the order statistics tree. ej:
+	\begin{lstlisting}[language=C++]
+	#include <ext/pb_ds/assoc_container.hpp>
+	using namespace __gnu_pbds;
+	tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ost ({5, 6, 7});
+	ost.erase(5);
+	// New value of ost = {6, 7}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{find\_by\_order(k)}: Find the k-th smallest element in the order statistics tree. ej:
+	\begin{lstlisting}[language=C++]
+	#include <ext/pb_ds/assoc_container.hpp>
+	using namespace __gnu_pbds;
+	tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ost ({5, 6, 7});
+	ost.find_by_order(1);
+	// Will return an iterator to the element 6
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{order\_of\_key(x)}: Find the number of elements strictly less than x in the order statistics tree. ej:
+	\begin{lstlisting}[language=C++]
+	#include <ext/pb_ds/assoc_container.hpp>
+	using namespace __gnu_pbds;
+	tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ost ({5, 6, 7});
+	ost.order_of_key(6);
+	// Will return 1
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O($log_2n$).
+      \item \texttt{clear()}: Remove all elements from the order statistics tree. ej:
+	\begin{lstlisting}[language=C++]
+	#include <ext/pb_ds/assoc_container.hpp>
+	using namespace __gnu_pbds;
+	tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ost ({5, 6, 7});
+	ost.clear();
+	// New value of ost = {}
+	\end{lstlisting}
+	\textbf{Note:} Complexity of O(n).
+    \end{enumerate}
   \item \textbf{Set:}
     \begin{enumerate}
-      \item \texttt{insert(x)}: Insert element x in the set. ej: 
+      \item \texttt{insert(x)}: Insert element x in the set. ej:
 	\begin{lstlisting}[language=C++]
 	set<int> s;
 	s.insert(5);
 	// New value of s = {5}
 	\end{lstlisting}
 	\textbf{Note:} Complexity of O($log_2n$).
-      \item \texttt{erase(x)}: Erase element x from the set. ej: 
+      \item \texttt{erase(x)}: Erase element x from the set. ej:
 	\begin{lstlisting}[language=C++]
 	set<int> s ({5, 6, 7});
 	s.erase(5);
 	// New value of s = {6, 7}
 	\end{lstlisting}
 	\textbf{Note:} Complexity of O($log_2n$).
-      \item \texttt{find(x)}: Find element x in the set. ej: 
+      \item \texttt{find(x)}: Find element x in the set. ej:
 	\begin{lstlisting}[language=C++]
-	set<int> s; 
+	set<int> s;
 	s.find(5);
 	// Will return s.end() if x is not in the set
 	\end{lstlisting}

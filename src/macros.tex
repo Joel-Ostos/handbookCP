@@ -1,0 +1,44 @@
+\section{Macros}
+\begin{enumerate}
+  \item \textbf{Debugging:}
+    \begin{enumerate}
+      \item \texttt{assert(x)}: If x is false, the program will terminate. ej:
+	\begin{lstlisting}[language=C++]
+	assert(1 == 2);
+	// Will terminate the program
+	\end{lstlisting}
+    \end{enumerate}
+  \item \textbf{Container related Macros:}
+    \begin{enumerate}
+      \item \textbf{all(x)}
+	\begin{lstlisting}[language=C++]
+	#define all(x) x.begin(), x.end()
+	\end{lstlisting}
+      \item \textbf{pb}
+	\begin{lstlisting}[language=C++]
+	#define pb push_back
+	\end{lstlisting}
+    \end{enumerate}
+  \item \textbf{Types: }
+    \begin{enumerate}
+      \item \textbf{int}
+	\begin{lstlisting}[language=C++]
+	#define int long long
+	\end{lstlisting}
+      \item \textbf{vi, vb and vpi}
+	\begin{lstlisting}[language=C++]
+	#define vi vector<int>
+	#define vb vector<bool>
+	#define vpi vector<pair<int, int>>
+	\end{lstlisting}
+      \item \textbf{pi}
+	\begin{lstlisting}[language=C++]
+	#define pi pair<int, int>
+	\end{lstlisting}
+      \item \textbf{ff and ss}
+	\begin{lstlisting}[language=C++]
+	#define ff first
+	#define ss second
+	\end{lstlisting}
+    \end{enumerate}
+\end{enumerate}
