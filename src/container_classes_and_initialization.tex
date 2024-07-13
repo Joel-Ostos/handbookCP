@@ -30,5 +30,72 @@
 	  \item \texttt{set<int> s \{1, 2, 3, 4\}}: Declares a set of integers with the elements 1, 2, 3 and 4.
 	  \item \texttt{set<int> s = \{1, 2, 3, 4\}}: Declares a set of integers with the elements 1, 2, 3 and 4.
 	\end{enumerate}
+      \item \textbf{Map:}
+	\begin{enumerate}
+	  \item Class:
+	    \begin{lstlisting}[language=C++]
+	    template <class Key, class T, class Compare = less<Key>, class Alloc = allocator<pair<const Key, T>>> class map;
+	    \end{lstlisting}
+	  \item Initialization:
+	    \begin{enumerate}
+	      \item \texttt{map<int, int> m}: Declares a map with integer keys and values.
+	      \item \texttt{map<int, int> m \{\{1, 2\}, \{3, 4\}\}}: Declares a map with the key-value pairs \{1, 2\} and \{3, 4\}.
+	      \item \texttt{map<int, int> m = \{\{1, 2\}, \{3, 4\}\}}: Declares a map with the key-value pairs \{1, 2\} and \{3, 4\}.
+	    \end{enumerate}
+	\end{enumerate}
+      \item \textbf{Multiset:}
+	\begin{enumerate}
+	  \item Class:
+	    \begin{lstlisting}[language=C++]
+	    template <class T, class Compare = less<T>, class Alloc = allocator<T>> class multiset;
+	    \end{lstlisting}
+	  \item Initialization:
+	    \begin{enumerate}
+	      \item \texttt{multiset<int> ms}: Declares a multiset of integers.
+	      \item \texttt{multiset<int> ms \{1, 2, 2, 3, 4\}}: Declares a multiset of integers with the elements 1, 2, 2, 3, and 4.
+	      \item \texttt{multiset<int> ms = \{1, 2, 2, 3, 4\}}: Declares a multiset of integers with the elements 1, 2, 2, 3, and 4.
+	    \end{enumerate}
+	\end{enumerate}
+      \item \textbf{Unordered Set:}
+	\begin{enumerate}
+	  \item Class:
+	    \begin{lstlisting}[language=C++]
+	    template <class Key, class Hash = hash<Key>, class Pred = equal_to<Key>, class Alloc = allocator<Key>> class unordered_set;
+	    \end{lstlisting}
+	  \item Initialization:
+	    \begin{enumerate}
+	      \item \texttt{unordered\_set<int> us}: Declares an unordered set of integers.
+	      \item \texttt{unordered\_set<int> us \{1, 2, 3, 4\}}: Declares an unordered set of integers with the elements 1, 2, 3, and 4.
+	      \item \texttt{unordered\_set<int> us = \{1, 2, 3, 4\}}: Declares an unordered set of integers with the elements 1, 2, 3, and 4.
+	    \end{enumerate}
+	\end{enumerate}
+      \item \textbf{Unordered Map:}
+	\begin{enumerate}
+	  \item Class:
+	    \begin{lstlisting}[language=C++]
+	    template <class Key, class T, class Hash = hash<Key>, class Pred = equal_to<Key>, class Alloc = allocator<pair<const Key, T>>> class unordered_map;
+	    \end{lstlisting}
+	  \item Initialization:
+	    \begin{enumerate}
+	      \item \texttt{unordered\_map<int, int> um}: Declares an unordered map with integer keys and values.
+	      \item \texttt{unordered\_map<int, int> um \{\{1, 2\}, \{3, 4\}\}}: Declares an unordered map with the key-value pairs \{1, 2\} and \{3, 4\}.
+	      \item \texttt{unordered\_map<int, int> um = \{\{1, 2\}, \{3, 4\}\}}: Declares an unordered map with the key-value pairs \{1, 2\} and \{3, 4\}.
+	    \end{enumerate}
+	\end{enumerate}
+      \item \textbf{Order Statistics Tree (using \texttt{tree} from \texttt{<ext/pb\_ds/assoc\_container.hpp>}):}
+	\begin{enumerate}
+	  \item Class:
+	    \begin{lstlisting}[language=C++]
+	    #include <ext/pb_ds/assoc_container.hpp>
+	    using namespace __gnu_pbds;
+	    template <class Key, class Mapped, class Cmp_Fn = std::less<Key>, class Tag = rb_tree_tag, class Node_Update = null_node_update, class Alloc = std::allocator<char>> class tree;
+	    \end{lstlisting}
+	  \item Initialization:
+	    \begin{enumerate}
+	      \item \texttt{tree<int, null\_type, less<int>, rb\_tree\_tag, tree\_order\_statistics\_node\_update> ost}: Declares an order statistics tree of integers.
+	      \item \texttt{tree<int, null\_type, less<int>, rb\_tree\_tag, tree\_order\_statistics\_node\_update> ost \{1, 2, 3, 4\}}: Declares an order statistics tree of integers with the elements 1, 2, 3, and 4.
+	      \item \texttt{tree<int, null\_type, less<int>, rb\_tree\_tag, tree\_order\_statistics\_node\_update> ost = \{1, 2, 3, 4\}}: Declares an order statistics tree of integers with the elements 1, 2, 3, and 4.
+	    \end{enumerate}
+	\end{enumerate}
     \end{enumerate}
-\end{enumerate}
+  \end{enumerate}
