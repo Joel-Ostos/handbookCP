@@ -1,0 +1,392 @@
+\section{Functions}
+\section*{Graphs}
+\begin{enumerate}
+  \item \textbf{DFS:}
+	\begin{lstlisting}[language=C++]
+	#include <iostream>
+
+	struct Node {
+	    int data;
+	    Node* left;
+	    Node* right;
+	    
+	    Node(int value) : data(value), left(nullptr), right(nullptr) {}
+	};
+	\end{lstlisting}
+	Preorder:
+	\begin{lstlisting}[language=C++]
+	void preorder(Node* node) {
+		if (node == nullptr) return;
+		std::cout << node->data << " ";
+		preorder(node->left);
+		preorder(node->right);
+	}
+	\end{lstlisting}
+	\begin{lstlisting}[language=C++]
+	void inorder(Node* node) {
+		if (node == nullptr) return;
+		inorder(node->left);
+		std::cout << node->data << " ";
+		inorder(node->right);
+	}
+	\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+	void postorder(Node* node) {
+		if (node == nullptr) return;
+		postorder(node->left);
+		postorder(node->right);
+		std::cout << node->data << " ";
+	}
+	\end{lstlisting}
+	Dfs:
+
+	\begin{lstlisting}[language=C++]
+		#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void DFSUtil(int v, vector<bool> &visited, const vector<vector<int>> &adj) {
+    visited[v] = true;
+    cout << v << " ";
+
+    for (int i : adj[v]) {
+        if (!visited[i]) {
+            DFSUtil(i, visited, adj);
+        }
+    }
+}
+
+void DFS(int V, const vector<vector<int>> &adj) {
+    vector<bool> visited(V, false);
+
+    for (int i = 0; i < V; ++i) {
+        if (!visited[i]) {
+            DFSUtil(i, visited, adj);
+        }
+    }
+}
+
+int main() {
+    int V = 5;
+    vector<vector<int>> adj(V);
+
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(3);
+    adj[2].push_back(4);
+
+    cout << "DFS starting from vertex 0:\n";
+    DFS(V, adj);
+
+    return 0;
+}
+
+	\end{lstlisting}
+\item BFS:
+	\begin{lstlisting}[language=C++]
+	#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+void BFS(int start, int V, const vector<vector<int>> &adj) {
+    vector<bool> visited(V, false);
+    queue<int> q;
+
+    visited[start] = true;
+    q.push(start);
+
+    while (!q.empty()) {
+        int v = q.front();
+        q.pop();
+        cout << v << " ";
+
+        for (int i : adj[v]) {
+            if (!visited[i]) {
+                visited[i] = true;
+                q.push(i);
+            }
+        }
+    }
+}
+
+int main() {
+    int V = 5;
+    vector<vector<int>> adj(V);
+
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(3);
+    adj[2].push_back(4);
+
+    cout << "BFS starting from vertex 0:\n";
+    BFS(0, V, adj);
+
+    return 0;
+}
+
+	\end{lstlisting}
+	\item Kruskal:
+	\begin{lstlisting}[language=C++]
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+	using namespace std;
+
+	struct Edge {
+		int src, dest, weight;
+	};
+
+struct Graph {
+	int V, E;
+	vector<Edge> edges;
+};
+
+struct subset {
+	int parent;
+	int rank;
+};
+
+int find(subset subsets[], int i) {
+	if (subsets[i].parent != i) {
+		subsets[i].parent = find(subsets, subsets[i].parent);
+	}
+	return subsets[i].parent;
+}
+
+void Union(subset subsets[], int x, int y) {
+	int xroot = find(subsets, x);
+	int yroot = find(subsets, y);
+
+	if (subsets[xroot].rank < subsets[yroot].rank) {
+		subsets[xroot].parent = yroot;
+	} else if (subsets[xroot].rank > subsets[yroot].rank) {
+		subsets[yroot].parent = xroot;
+	} else {
+		subsets[yroot].parent = xroot;
+		subsets[xroot].rank++;
+	}
+}
+
+void KruskalMST(Graph& graph) {
+	vector<Edge> result;
+	int V = graph.V;
+	sort(graph.edges.begin(), graph.edges.end(), [](Edge a, Edge b) {
+			return a.weight < b.weight;
+			});
+
+	subset* subsets = new subset[(V * sizeof(subset))];
+	for (int v = 0; v < V; ++v) {
+		subsets[v].parent = v;
+		subsets[v].rank = 0;
+	}
+
+	for (Edge e : graph.edges) {
+		int x = find(subsets, e.src);
+		int y = find(subsets, e.dest);
+
+		if (x != y) {
+			result.push_back(e);
+			Union(subsets, x, y);
+		}
+	}
+
+	cout << "Edges in the MST:\n";
+	for (Edge e : result) {
+		cout << e.src << " -- " << e.dest << " == " << e.weight << endl;
+	}
+
+	delete[] subsets;
+}
+
+int main() {
+	Graph graph;
+	graph.V = 4;
+	graph.E = 5;
+	graph.edges = {
+		{0, 1, 10},
+		{0, 2, 6},
+		{0, 3, 5},
+		{1, 3, 15},
+		{2, 3, 4}
+	};
+
+	KruskalMST(graph);
+
+	return 0;
+}
+
+	\end{lstlisting}
+	\item Prims:
+	\begin{lstlisting}[language=C++]
+	#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+int minKey(const vector<int>& key, const vector<bool>& mstSet, int V) {
+    int min = INT_MAX, min_index;
+
+    for (int v = 0; v < V; v++)
+        if (!mstSet[v] && key[v] < min)
+            min = key[v], min_index = v;
+
+    return min_index;
+}
+
+void PrimMST(const vector<vector<int>>& graph, int V) {
+    vector<int> parent(V);
+    vector<int> key(V, INT_MAX);
+    vector<bool> mstSet(V, false);
+
+    key[0] = 0;
+    parent[0] = -1;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = minKey(key, mstSet, V);
+        mstSet[u] = true;
+
+        for (int v = 0; v < V; v++)
+            if (graph[u][v] && !mstSet[v] && graph[u][v] < key[v])
+                parent[v] = u, key[v] = graph[u][v];
+    }
+
+    cout << "Edge \tWeight\n";
+    for (int i = 1; i < V; i++)
+        cout << parent[i] << " - " << i << " \t" << graph[i][parent[i]] << " \n";
+}
+
+int main() {
+    int V = 5;
+    vector<vector<int>> graph = {
+        {0, 2, 0, 6, 0},
+        {2, 0, 3, 8, 5},
+        {0, 3, 0, 0, 7},
+        {6, 8, 0, 0, 9},
+        {0, 5, 7, 9, 0}
+    };
+
+    PrimMST(graph, V);
+
+    return 0;
+}
+
+	\end{lstlisting}
+	\item Dijkstra:
+	\begin{lstlisting}[language=C++]
+	#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
+
+using namespace std;
+
+void dijkstra(const vector<vector<pair<int, int>>> &graph, int src) {
+    int V = graph.size();
+    vector<int> dist(V, INT_MAX);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+    pq.push({0, src});
+    dist[src] = 0;
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (auto &neighbor : graph[u]) {
+            int v = neighbor.first;
+            int weight = neighbor.second;
+
+            if (dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    cout << "Vertex \t Distance from Source\n";
+    for (int i = 0; i < V; ++i)
+        cout << i << " \t " << dist[i] << "\n";
+}
+
+int main() {
+    int V = 5;
+    vector<vector<pair<int, int>>> graph(V);
+
+    graph[0].push_back({1, 10});
+    graph[0].push_back({4, 5});
+    graph[1].push_back({2, 1});
+    graph[1].push_back({4, 2});
+    graph[2].push_back({3, 4});
+    graph[3].push_back({0, 7});
+    graph[3].push_back({2, 6});
+    graph[4].push_back({1, 3});
+    graph[4].push_back({2, 9});
+    graph[4].push_back({3, 2});
+
+    dijkstra(graph, 0);
+
+    return 0;
+}
+
+	\end{lstlisting}
+	\item Bellman:
+	\begin{lstlisting}[language=C++]
+	#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+struct Edge {
+    int src, dest, weight;
+};
+
+void bellmanFord(const vector<Edge> &edges, int V, int src) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 1; i <= V - 1; ++i) {
+        for (const auto &edge : edges) {
+            if (dist[edge.src] != INT_MAX && dist[edge.src] + edge.weight < dist[edge.dest]) {
+                dist[edge.dest] = dist[edge.src] + edge.weight;
+            }
+        }
+    }
+
+    for (const auto &edge : edges) {
+        if (dist[edge.src] != INT_MAX && dist[edge.src] + edge.weight < dist[edge.dest]) {
+            cout << "Graph contains negative weight cycle\n";
+            return;
+        }
+    }
+
+    cout << "Vertex \t Distance from Source\n";
+    for (int i = 0; i < V; ++i)
+        cout << i << " \t " << dist[i] << "\n";
+}
+
+int main() {
+    int V = 5;
+    vector<Edge> edges = {
+        {0, 1, -1},
+        {0, 2, 4},
+        {1, 2, 3},
+        {1, 3, 2},
+        {1, 4, 2},
+        {3, 2, 5},
+        {3, 1, 1},
+        {4, 3, -3}
+    };
+
+    bellmanFord(edges, V, 0);
+
+    return 0;
+}
+	\end{lstlisting}
+\end{enumerate}
