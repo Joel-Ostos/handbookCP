@@ -1,0 +1,43 @@
+\section{Interesting classes}
+\begin{enumerate}
+  \item \textbf{Compare Class}\\
+    Some containers of the STL require a comparison class to be passed as a template parameter, and the STL provides us with a few of them. However, we can also define our own comparison classes. In this chaper we will see what are the commparison classes that the STL provides us with and how to define our own comparison classes. 
+    It is worth mentioning that the comparison class is used to compare two elements not necessarily in a container, as we see below.
+    \begin{enumerate}
+      \item \textbf{std::less} \\
+	The \texttt{std::less} class is a comparison class that is used to compare two elements of a container. It is the default comparison class for most of the containers of the STL. The \texttt{operator()} function takes two arguments, which are the two elements that we want to compare. The \texttt{operator()} function returns \texttt{true} if the first element is less than the second element, and \texttt{false} otherwise. The \texttt{std::less} class is used by default by most of the containers of the STL.
+	example:
+	\begin{lstlisting}
+	#include <iostream>
+	#include <functional>
+	int main() {
+	  std::less<int> less;
+	  std::cout << less(1, 2) << std::endl;
+	  std::cout << less(2, 1) << std::endl;
+	  return 0;
+	}
+	\end{lstlisting}
+	Example in container:
+	\begin{lstlisting}
+	#include <iostream>
+	#include <set>
+	#include <functional>
+	int main() {
+	  std::set<int, std::less<int>> s;
+	  s.insert(1);
+	  s.insert(2);
+	  s.insert(3);
+	  for (int i : s) {
+	    std::cout << i << std::endl;
+	  }
+	  return 0;
+	}
+	\end{lstlisting}
+	The design pattern of \textbf{std::less<T>} is repeated in the following classes, so they will be shorter, with only examples.
+      \item \textbf{std::greater}
+      \item \textbf{std::less\_equal}
+      \item \textbf{std::greater\_equal}
+      \item \textbf{std::equal\_to}
+      \item \textbf{std::not\_equal\_to}
+    \end{enumerate}
+\end{enumerate}
